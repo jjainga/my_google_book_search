@@ -1,38 +1,34 @@
 const db = require("../models")
 
-// Defining methods for the booksController
 module.exports = {
-    findAll: function(req, res) {
-      db.Book
-        .find(req.query)
-        .sort({ date: -1 })
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+    findAll: function(req,res) {
+        db.book
+            .find()
+            .then(dbBook => res.json(dbBook))
+            .catch(err => res.staus(422).json(err))
     },
     findById: function(req, res) {
-      db.Book
-        .findById(req.params.id)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+        db.book
+            .findById(req.params.id)
+            .then(dbBook => res.json(dbBook))
+            .catch(err => res.status(422).json(er))
     },
-    create: function(req, res) {
-      db.Book
-        .create(req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+    create: function({body}, res) {
+        db.book
+            .create(body)
+            .then(dbBook => res.json(dbBook))
+            .catch(err => res.status(422).json(err))
     },
-    update: function(req, res) {
-      db.Book
-        .findOneAndUpdate({ _id: req.params.id }, req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+    update: function({body, params}, res) {
+        db.book
+            .findOneAndUpdate({_id: params.id}, {$set: body})
+            .then(dbBook => res.json(dbBook))
+            .catch(err => res.status(422).json(err))
     },
-    remove: function(req, res) {
-      db.Book
-        .findById({ _id: req.params.id })
-        .then(dbModel => dbModel.remove())
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+    remove: function(req,res) {
+        db.book
+            .findByIdAndRemove({_id: req.params.id})
+            .then(dbBook => res.json(dbBook))
+            .catch(err => res.status(422).json(err))
     }
-  };
-  
+}
