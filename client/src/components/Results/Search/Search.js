@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Bannner from "../../Banner/Banner"
 import SearchBar from "../Search/Searchbar"
 import axios from "axios";
+// import router from "../../../../../routes/bookRoutes"
 
 
 
@@ -61,14 +62,13 @@ async function searchList(value) {
     return (
         <div>
             <Bannner />
-            <SearchBar handleInputChange={handleInputChange} value={inputState.input} handleClick={handleClick} handleSubmit={handleSubmit} />
+            <SearchBar handleInputChange={handleInputChange} value={inputState.input} tiny={inputState.filter} handleClick={handleClick} handleSubmit={handleSubmit} />
             <div>
                 <h1>Search Results</h1>
                 <hr />
             {SearchState.search !== undefined ? (
             SearchState.search.map(bookObj => 
                 <div className="border container w-80 mt-3 text-left" key={bookObj.id}>
-                    {console.log(bookObj)}
                         <div className="row" >
                             <div className="col-8">
                                 <h2>{bookObj.volumeInfo.title}</h2>
